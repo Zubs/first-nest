@@ -1,4 +1,13 @@
-import { Controller, Delete, Get, Post, Put } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { CreateItemDto } from './dto/create-item.dto';
 
 @Controller('items')
 export class ItemsController {
@@ -8,22 +17,22 @@ export class ItemsController {
   }
 
   @Post()
-  create(): string {
-    return 'Store new item';
+  create(@Body() createItemDto: CreateItemDto): string {
+    return `Name: ${createItemDto.name}\nDescription: ${createItemDto.description}\nQuantity: ${createItemDto.quantity}`;
   }
 
-  @Get()
-  show(): string {
-    return 'Get single item';
+  @Get(':id')
+  show(@Param('id') id): string {
+    return `Get single item, item ${id}`;
   }
 
-  @Put()
-  update(): string {
-    return 'Update single item';
+  @Put(':id')
+  update(@Body() updateItemDto: CreateItemDto, @Param('id') id): string {
+    return `Update single item, item ${id}\nNew name: ${updateItemDto.name}\nNew Description: ${updateItemDto.description}\nNew Quantity: ${updateItemDto.quantity}`;
   }
 
-  @Delete()
-  delete(): string {
-    return 'Delete single item';
+  @Delete(':id')
+  delete(@Param('id') id): string {
+    return `Delete single item, item ${id}`;
   }
 }
