@@ -10,6 +10,7 @@ import {
 import { CreateItemDto } from './dto/create-item.dto';
 import { ItemsService } from './items.service';
 import { ItemInterface } from './interfaces/item.interface';
+import It = jest.It;
 
 @Controller('items')
 export class ItemsController {
@@ -21,8 +22,8 @@ export class ItemsController {
   }
 
   @Post()
-  create(@Body() createItemDto: CreateItemDto): string {
-    return `Name: ${createItemDto.name}\nDescription: ${createItemDto.description}\nQuantity: ${createItemDto.quantity}`;
+  async create(@Body() createItemDto: CreateItemDto): Promise<ItemInterface> {
+    return this.itemsService.create(createItemDto);
   }
 
   @Get(':id')

@@ -14,4 +14,8 @@ export class ItemsService {
   async show(id: string): Promise<ItemInterface> {
     return await this.itemModel.findById(id);
   }
+
+  async create(item: ItemInterface): Promise<ItemInterface> {
+    return await new this.itemModel(item).save();
+  }
 }
