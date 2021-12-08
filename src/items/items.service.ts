@@ -18,4 +18,8 @@ export class ItemsService {
   async create(item: ItemInterface): Promise<ItemInterface> {
     return await new this.itemModel(item).save();
   }
+
+  async delete(id: string): Promise<ItemInterface> {
+    return await this.itemModel.findOneAndDelete({ _id: id });
+  }
 }
