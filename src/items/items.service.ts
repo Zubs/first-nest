@@ -22,4 +22,8 @@ export class ItemsService {
   async delete(id: string): Promise<ItemInterface> {
     return await this.itemModel.findOneAndDelete({ _id: id });
   }
+
+  async update(id: string, item: ItemInterface): Promise<ItemInterface> {
+    return await this.itemModel.findByIdAndUpdate(id, item, { new: true });
+  }
 }
