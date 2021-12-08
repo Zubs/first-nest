@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { ItemInterface } from './interfaces/item.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ItemsService {
-  private readonly items: ItemInterface[] = [];
+  constructor(@InjectModel('Item') private readonly itemModel: Model<ItemInterface>) {}
 
-  find(): ItemInterface[] {
-    return this.items;
+  async find(): Promise<ItemInterface[]> {
+    return await this.itemModel.find();
   }
 
-  show(): ItemInterface {
-    return this.items[0];
+  async show(id: string): Promise<ItemInterface> {
+    return await this.itemModel.findById(id);
   }
 }

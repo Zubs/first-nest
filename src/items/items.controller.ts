@@ -16,7 +16,7 @@ export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
   @Get()
-  find(): ItemInterface[] {
+  async find(): Promise<ItemInterface[]> {
     return this.itemsService.find();
   }
 
@@ -26,8 +26,8 @@ export class ItemsController {
   }
 
   @Get(':id')
-  show(@Param('id') id): ItemInterface {
-    return this.itemsService.show();
+  async show(@Param('id') id): Promise<ItemInterface> {
+    return this.itemsService.show(id);
   }
 
   @Put(':id')
