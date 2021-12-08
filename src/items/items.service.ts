@@ -8,4 +8,8 @@ export class ItemsService {
   find(): ItemInterface[] {
     return this.items;
   }
+
+  show(): ItemInterface {
+    return this.items[0];
+  }
 }

@@ -26,8 +26,8 @@ export class ItemsController {
   }
 
   @Get(':id')
-  show(@Param('id') id): string {
-    return `Get single item, item ${id}`;
+  show(@Param('id') id): ItemInterface {
+    return this.itemsService.show();
   }
 
   @Put(':id')
